@@ -51,8 +51,27 @@ export const Main = styled.main`
 export const Container = styled.div`
     display: flex;
     width: 90%;
-    gap: 1rem;
+    gap: 21px;
     padding: 1rem 0rem;
+
+    .label-button {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 32px;
+        
+        .add {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 32px;
+            height: 32px;
+            background-color: var(--Grey-3);
+            border-radius: 4px;
+            
+        }
+    }
 
     @media screen and (min-width: 768px){
         width: 70%;

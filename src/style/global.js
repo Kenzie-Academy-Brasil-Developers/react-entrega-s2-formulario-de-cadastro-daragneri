@@ -43,9 +43,14 @@ export default createGlobalStyle`
     }
     button {
         cursor: pointer;
+        border: none;
+        background-color: transparent;
     }
     a {
         text-decoration: none;
+    }
+    ul, li {
+        list-style: none;
     }
 `
 export const SmallButton = styled.button`

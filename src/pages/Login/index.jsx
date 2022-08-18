@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import api from "../../services/api";
 import { ThemeP, ThemeTitle } from "../../style/typography";
 import { Container, Form, Img, Main, Nav } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,11 +8,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import InputBox from "../../components/InputBox";
+import { useContext }  from 'react'
+import { UserContext } from "../../components/context/UserContext";
 
 
 const Login = () => {
     const navigate = useNavigate()
-       
+    const {signIn} = useContext(UserContext) 
     
   const schema = yup.object({
     email: yup
@@ -33,18 +34,6 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  function loginUser(data) {
-    api.post('/sessions', data)
-    .then(response => {
-        localStorage.setItem('@TOKEN', response.data.token)
-        localStorage.setItem('@USERID', response.data.user.id)
-        
-        navigate('/dashboard')
-
-    })
-    .catch(err => console.log(err))
-  }
-
   return (
     <>
       <Nav>
@@ -57,8 +46,9 @@ const Login = () => {
           <ThemeTitle titleSize={"title1"} tag={"h1"}>
             Login
           </ThemeTitle>
-          <Form onSubmit={handleSubmit(loginUser)}>
+          <Form onSubmit={handleSubmit(signIn)}>
             <InputBox
+            
               name={"email"}
               labelName={"E-mail"}
               placeholder={"E-mail"}

@@ -16,6 +16,7 @@ export const ThemeLogo = styled.img`
 export const ThemeTitle = styled(BaseTitle)`
     color: var(--Grey-0);
     font-weight: 700;
+    font-family: 'Inter', sans-serif;
     ${(props) => {
         switch(props.titleSize){
             case 'title1':
@@ -35,7 +36,7 @@ export const ThemeTitle = styled(BaseTitle)`
                 `
                 case 'title3':
                 return css`
-                font-size: 18px;
+                font-size: 14px;
                 `
             default: 
             return false;
@@ -118,4 +119,47 @@ export const ThemeLabelDashboard = styled.span`
     font-weight: 400;
     font-size: 12px;
     color: var(--Grey-1);
-`
+`;
+export const ThemeNivelTech = styled.span`
+    font-family: 'Inter';
+    color: var(--Grey-1);
+    font-weight: 400;
+    font-size: 12.182px;    
+`;
+
+export const ThemeLabelForm = styled.label`
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12.182px;
+    color: var(--Grey-0);
+`;
+export const ThemeInputForm = styled.input`
+   padding: 0px 16.2426px;
+   height: 48px;
+   background: var(--Grey-2);
+   border: ${(props) => props.border};
+   border-radius: 4px;
+   color: var(--White);
+   font-weight: 500;
+   font-size: 14px;
+   ::placeholder {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 16.2426px;
+    color: var(--Grey-0);
+   }
+`;
+export const Select = styled.select`
+    padding: 0px 16.2426px;
+    height: 48px;
+    background: var(--Grey-2);
+    border: 1.2182px solid var(--Grey-2);
+    border-radius: 4px;
+
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 16.2426px;
+    color: var(--Grey-0);
+`;
+

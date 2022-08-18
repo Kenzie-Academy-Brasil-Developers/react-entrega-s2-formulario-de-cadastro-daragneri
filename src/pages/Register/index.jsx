@@ -49,9 +49,7 @@ const Register = () => {
   });
 
   function registerUser(data) {
-   /* {headers: {
-    Authorization: `Bearer ${token}`
-   }} */
+  
     api.post('/users', data)
     .then(response => {
         navigate('/')
