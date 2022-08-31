@@ -6,33 +6,33 @@ import * as yup from "yup"
 import api from "../../../services/api";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useContext } from "react";
-import { UserContext } from "../../context/UserContext";
-
 
 const schema = yup.object({
     status: yup.string().required("Preencha o campo obrigatório"),
 
 });
 
-const EditForm = ({tech, handleDeleteTech, setIsOpenEditModal}) => {
-    const {loadUser} = useContext(UserContext);
+interface IEditFormProps {
+    tech: {};
+    handleDeleteTech: () => void;
+    setIsOpenEditModal: boolean;
+}
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+const EditForm = ({tech, handleDeleteTech, setIsOpenEditModal}: IEditFormProps) => {
+
+    const { register, handleSubmit } = useForm({
         resolver: yupResolver(schema)
     });
      
     function editTech(dataTech) {
         const token = localStorage.getItem('@TOKEN')
-        api.defaults.headers.authorization = `Bearer ${token}`;
+        api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         api.put(`/users/techs/${tech.id}`, dataTech)
         .then( _ => {
-            loadUser()
             setIsOpenEditModal(false)
-            toast.success('Editado com sucesso!') 
+            toast.success('Editado com sucesso') 
          }).catch( _ => toast.error('Ops! Houve algum erro.'))
     }
-    console.log(errors)
 
     return (
         <Form onSubmit={handleSubmit(editTech)}>
@@ -42,7 +42,7 @@ const EditForm = ({tech, handleDeleteTech, setIsOpenEditModal}) => {
             </div>
             <div className="input-box">
                 <ThemeLabelForm>Status</ThemeLabelForm>
-                <Select name="" id="" defaultValue={tech.status} {...register("status")}>
+                <Select defaultValue={tech.status} {...register("status")}>
                     <option value="Iniciante">Iniciante</option>
                     <option value="Intermediário">Intermediário</option>
                     <option value="Avançado">Avançado</option>

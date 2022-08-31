@@ -7,9 +7,9 @@ import EditModal from '../../Modais/EditModal';
 import { Li } from './../Card/styles'
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
-const Card = ({tech}) => {
+const Card = ({tech, index}) => {
 
-    const {loadUser} = useContext(UserContext);
+    const {techs, setTechs} = useContext(UserContext);
     const [isOpenEditModal, setIsOpenEditModal] = useState(false);
     
     function handleDeleteTech(idtech) {
@@ -18,10 +18,10 @@ const Card = ({tech}) => {
        
 
         api.delete(`/users/techs/${idtech}`)
-        .then( _ => {
+        .then( response => {
+            const filtered = techs.filter(e => e.id !== idtech)
+            setTechs([...techs, filtered])
             setIsOpenEditModal(false)
-            loadUser()
-
         })
         
         .catch(err => console.log(err))

@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
+ export type bcColor = {
+  bcColor: string;
+}
 export const Buttons = styled.button`
-    background-color: ${({bcColor}) => bcColor};
+    background-color: ${({bcColor}: bcColor) => bcColor};
     width: 100%;
     font-size: 12.8347px;
     color: var(--White);
@@ -12,7 +15,7 @@ export const Buttons = styled.button`
     padding: 0.512rem 0rem 0.512rem 0rem;
 
     &:hover {
-        background-color: ${({bcHover}) => bcHover}
+        background-color: ${({bcHover}: any) => bcHover}
     }
 
     @media screen and (min-width: 768px) {

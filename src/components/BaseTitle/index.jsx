@@ -1,3 +1,10 @@
+/* export interface ITitleProps {
+    tag: string;
+    className: string;
+    children: ReactNode;
+    
+  } */
+
 const BaseTitle = ({tag, className, children}) => {
     return (
         <>

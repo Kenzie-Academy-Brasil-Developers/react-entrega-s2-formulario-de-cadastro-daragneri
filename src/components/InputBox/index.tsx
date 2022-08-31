@@ -1,8 +1,19 @@
 
+import { ReactNode } from "react";
 import { SmallError, ThemeInput, ThemeLabel } from "../../style/typography";
 import { ThemeInputBox } from "./styles";
 
-const InputBox = ({errors, border, register, name, labelName, ...rest}) => {
+interface InputBoxProps {
+    errors: string;
+    border: string;
+    register: string;
+    name: string;
+    labelName: string;
+    rest: ReactNode;
+    
+}
+
+const InputBox = ({errors, border, register, name, labelName, ...rest}: InputBoxProps) => {
     return (
         <ThemeInputBox>
             <ThemeLabel htmlFor={name}>{labelName}</ThemeLabel>

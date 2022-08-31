@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { SmallError, ThemeLabelRegister, ThemeTitle } from "../../style/typography";
 import { Container, Form, Main, Nav } from "./styles";
@@ -10,7 +9,9 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Button from "../../components/Button";
 import { Img } from "../Login/styles";
-import api from "../../services/api";
+import { IFormRegister, UserContext } from "../../components/context/UserContext";
+import { useContext } from "react";
+
 
 const schema = yup.object({
   name: yup.string().required("* O nome é obrigatório"),
@@ -39,23 +40,15 @@ const schema = yup.object({
 });
 
 const Register = () => {
-  const navigate = useNavigate()
+  const {registerUser} = useContext(UserContext) 
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IFormRegister>({
     resolver: yupResolver(schema),
   });
-
-  function registerUser(data) {
-  
-    api.post('/users', data)
-    .then(response => {
-        navigate('/')
-    })
-    .catch(err => console.log(err))
-  }
 
   return (
     <>

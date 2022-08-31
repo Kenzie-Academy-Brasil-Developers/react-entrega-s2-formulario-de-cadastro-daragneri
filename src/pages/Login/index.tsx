@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { ThemeP, ThemeTitle } from "../../style/typography";
 import { Container, Form, Img, Main, Nav } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,7 +11,14 @@ import { useContext }  from 'react'
 import { UserContext } from "../../components/context/UserContext";
 
 
+
 const Login = () => {
+
+  interface IFormLogin {  
+    email: string;
+    password: string;    
+}
+
     const navigate = useNavigate()
     const {signIn} = useContext(UserContext) 
     
@@ -30,7 +36,7 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IFormLogin>({
     resolver: yupResolver(schema),
   });
 

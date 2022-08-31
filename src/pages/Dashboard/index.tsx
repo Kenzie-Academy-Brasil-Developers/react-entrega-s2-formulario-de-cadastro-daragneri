@@ -10,19 +10,18 @@ import { UserContext } from "../../components/context/UserContext";
 import { Navigate } from "react-router-dom";
 import { IoMdAdd } from "react-icons/io";
 import TechList from "../../components/TechList";
-import CreateModal from "./../../components/Modais/CreateModal"
-
-
+import CreateModal from "../../components/Modais/CreateModal"
 
 
 const Dashboard = () => {
+
   const { user, loading, loadUser } = useContext(UserContext);
-  const [isOpenCreateModal, setIsOpenCreateModal] = useState(false);
+  const [isOpenCreateModal, setIsOpenCreateModal] = useState<boolean>(false);
   
 
   useEffect(() => {
     loadUser();
-  }, []);
+  }, [user]);
 
   if (loading) return <div>Carregando...</div>;
   return user ? (
@@ -59,7 +58,7 @@ const Dashboard = () => {
               <IoMdAdd size={"25px"} color={"var(--White)"} />
             </button>
           </div>
-          <TechList user={user}/>
+          <TechList/>
         </Container>
       </Main>
     </>

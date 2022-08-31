@@ -1,20 +1,17 @@
 import Card from './Card'
 import { List } from './styles';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../context/UserContext';
 const TechList = () => {
-    const [isOpenEditModal, setIsOpenEditModal] = useState(false);
-    const {user} = useContext(UserContext);
-    const [techList, setTechList] = useState([])
-    
-    useEffect(() => {
-        setTechList(user.techs)
+    const [setIsOpenEditModal] = useState(false);
+    const {techs} = useContext(UserContext);
 
-    }, [user.techs])
+    
+    
     return (
         <List>
             {
-                techList.map(tech => <Card tech={tech} key={tech.id} setIsOpenEditModal={setIsOpenEditModal}/>)
+                techs.map((tech, index) => <Card tech={tech} key={tech.id} index={index} setIsOpenEditModal={setIsOpenEditModal}/>)
             }
         </List>
     )

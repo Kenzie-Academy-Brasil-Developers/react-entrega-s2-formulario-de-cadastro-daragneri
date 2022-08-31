@@ -7,14 +7,15 @@ import api from "../../../services/api";
 import { toast } from "react-toastify";
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext'; 
+
+
 const schema = yup.object({
     title: yup.string().required("Preencha o campo obrigatório"),
 
 });
 
-
 const CreateForm = ({setIsOPenCreateModal}) => {
-    const {loadUser} = useContext(UserContext);
+    const {techs, setTechs} = useContext(UserContext);
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
@@ -22,19 +23,17 @@ const CreateForm = ({setIsOPenCreateModal}) => {
 
     function registerTech(techData) {
         const token = localStorage.getItem('@TOKEN');
-        api.defaults.headers.authorization = `Bearer ${token}`;
+        api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         api.post('/users/techs', techData)
-        .then( _ => {
-            loadUser()
+        .then( response => {
+           setTechs([...techs, response.data]) 
            setIsOPenCreateModal(false)
            toast.success('Adicionado com sucesso')
-
 
         }).catch( _ => toast.error('Ops! Houve algum erro.'))
         
     }
-    
-    
+       
     return (
         <Form onSubmit={handleSubmit(registerTech)}>
             <div className="input-box">
@@ -44,7 +43,7 @@ const CreateForm = ({setIsOPenCreateModal}) => {
             </div>
             <div className="input-box">
                 <ThemeLabelForm>Selecione o status</ThemeLabelForm>
-                <Select name="" id="" {...register("status")}>
+                <Select {...register("status")}>
                 <option value="Iniciante">Iniciante</option>
                 <option value="Intermediário">Intermediário</option>
                 <option value="Avançado">Avançado</option>
